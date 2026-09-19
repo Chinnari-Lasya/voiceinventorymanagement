@@ -1,0 +1,31 @@
+# Render Blueprint for Stockbol (Next.js server + SQLite on a persistent disk).
+# One-click: https://dashboard.render.com/blueprint/new?repo=https://github.com/Chinnari-Lasya/voiceinventorymanagement
+#
+# Notes:
+# - SQLite needs a persistent disk, and Render disks require a paid instance type (Starter or above).
+#   The free plan has no disk: data would be lost on every restart/redeploy.
+# - The disk is mounted at /var/data; the database file lives there (DATABASE_PATH).
+# - Do not scale beyond 1 instance: SQLite is a single-writer file database.
+services:
+  - type: web
+    name: stockbol
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm run start -- -H 0.0.0.0
+    healthCheckPath: /api/health
+    numInstances: 1
+    disk:
+      name: stockbol-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_PATH
+        value: /var/data/stockbol.db
+      - key: SESSION_SECRET
+        generateValue: true
+      # Optional: leave unset to run in Basic mode (built-in rules; no external AI service).
+      # - key: ANTHROPIC_API_KEY
+      #   sync: false
