@@ -119,3 +119,13 @@ Shopkeeper-first, mobile-first (360×800), glanceable dashboard, one-tap flows, 
 ## Context hygiene (limited token budget)
 
 Start each session: read `CLAUDE.md` → `docs/PROGRESS.md` → the phase in `IMPLEMENTATION_PLAN.md` → only the referenced spec sections. Run `git status`, `git log --oneline -5`, `npm run check` for a baseline. Prefer targeted reads/greps over broad exploration; don't paste large files into chat; end sessions with a green tree and a precise resume note in `PROGRESS.md`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

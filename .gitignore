@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# secrets — never commit; only .env.example is tracked
+.env
+.env.local
+.env.*.local
+
+# local data and backups (SQLite files)
+data/
+backups/
+*.db
+*.db-wal
+*.db-shm
+
+# tooling
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+.DS_Store

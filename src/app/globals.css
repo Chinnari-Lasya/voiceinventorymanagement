@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Design tokens from UX_SPEC §3 (light theme first). Status colours are never the only signal. */
+@theme inline {
+  --color-canvas: #faf7f2;
+  --color-surface: #ffffff;
+  --color-ink: #1f2933;
+  --color-ink-muted: #52606d;
+  --color-primary: #0f766e;
+  --color-primary-ink: #ffffff;
+  --color-attention: #b45309;
+  --color-attention-bg: #fef3c7;
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fee2e2;
+  --color-ok: #166534;
+  --color-ok-bg: #dcfce7;
+  --color-line: #e4ded3;
+  --radius-card: 0.75rem;
+  /* System stack first; Noto Sans Telugu/Devanagari are used when installed (web fonts arrive with M5). */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Telugu",
+    "Noto Sans Devanagari", sans-serif;
+}
+
+html {
+  background: var(--color-canvas);
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Brief highlight on a product card whose stock just changed. */
+@keyframes flash {
+  0% { box-shadow: 0 0 0 0 rgb(15 118 110 / 0.5); background: #ecfdf5; }
+  100% { box-shadow: 0 0 0 12px rgb(15 118 110 / 0); background: var(--color-surface); }
+}
+.flash { animation: flash 1.4s ease-out; }
+@media (prefers-reduced-motion: reduce) { .flash { animation: none; } }
